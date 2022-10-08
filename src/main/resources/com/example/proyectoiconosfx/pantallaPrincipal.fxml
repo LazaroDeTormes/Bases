@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="409.0" prefWidth="600.0">
+         <children>
+            <Button accessibleText="categoriaBoton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" text="Buscar categoria" />
+            <TextField accessibleText="categoriaTxt" layoutX="19.0" layoutY="24.0" />
+            <TextField accessibleText="grupoTxt" layoutX="19.0" layoutY="134.0" />
+            <Button accessibleText="grupoBoton" layoutX="19.0" layoutY="175.0" mnemonicParsing="false" text="Buscar grupo" />
+            <Button accessibleText="aleatBoton" layoutX="19.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Aleatorio" />
+            <TableView layoutX="189.0" layoutY="22.0" prefHeight="339.0" prefWidth="386.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+   </children>
+</VBox>
