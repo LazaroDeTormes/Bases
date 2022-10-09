@@ -3,21 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectoiconosfx.Controller">
    <children>
-      <AnchorPane prefHeight="409.0" prefWidth="600.0">
+      <AnchorPane prefHeight="339.0" prefWidth="505.0">
          <children>
-            <Button accessibleText="categoriaBoton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" text="Buscar categoria" />
-            <TextField accessibleText="categoriaTxt" layoutX="19.0" layoutY="24.0" />
-            <TextField accessibleText="grupoTxt" layoutX="19.0" layoutY="134.0" />
-            <Button accessibleText="grupoBoton" layoutX="19.0" layoutY="175.0" mnemonicParsing="false" text="Buscar grupo" />
-            <Button accessibleText="aleatBoton" layoutX="19.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Aleatorio" />
-            <TableView layoutX="189.0" layoutY="22.0" prefHeight="339.0" prefWidth="386.0">
+            <Button accessibleText="categoriaBoton" layoutX="19.0" layoutY="79.0" mnemonicParsing="false" onAction="#buscarCategoria" text="Buscar categoria" />
+            <Button accessibleText="grupoBoton" layoutX="19.0" layoutY="167.0" mnemonicParsing="false" onAction="#buscarGrupo" text="Buscar grupo" />
+            <Button fx:id="aleatorioId" accessibleText="aleatBoton" layoutX="19.0" layoutY="267.0" mnemonicParsing="false" onAction="#aleatorio" prefHeight="25.0" prefWidth="149.0" text="Aleatorio" />
+            <TableView layoutX="189.0" layoutY="22.0" prefHeight="350.0" prefWidth="461.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
+            <Label fx:id="iconoLabel" layoutX="45.0" layoutY="304.0" prefHeight="75.0" prefWidth="97.0" text="Label" />
+            <ComboBox fx:id="catIdCombox" layoutX="19.0" layoutY="42.0"  prefWidth="150.0" promptText="Seleccionar" />
+            <ComboBox fx:id="grupoIdCombox" layoutX="19.0" layoutY="128.0" prefWidth="150.0" promptText="Seleccionar" />
          </children></AnchorPane>
    </children>
 </VBox>

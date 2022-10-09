@@ -3,7 +3,7 @@ package com.example.proyectoiconosfx;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Response{
+public class ResponseAllItem{
 
 	@JsonProperty("htmlCode")
 	public List<String> htmlCode;
@@ -20,7 +20,9 @@ public class Response{
 	@JsonProperty("group")
 	public String group;
 
-
+	public List<String> getHtmlCode(){
+		return htmlCode;
+	}
 
 	public String getName(){
 		return name;
@@ -29,17 +31,24 @@ public class Response{
 	public List<String> getUnicode(){
 		return unicode;
 	}
-	public List<String>	getHtmlCode(){return htmlCode;}
-	public String getGroup(){return group;}
+
+	public String getCategory(){
+		return category;
+	}
+
+	public String getGroup(){
+		return group;
+	}
 
 	@Override
-	public String toString() {
-		return "Response{" +
-				"htmlCode=" + htmlCode +
-				", name='" + name + '\'' +
-				", unicode=" + unicode +
-				", category='" + category + '\'' +
-				", group='" + group + '\'' +
-				'}';
-	}
+ 	public String toString(){
+		return 
+			"ResponseAllItem{" + 
+			"htmlCode = '" + htmlCode + '\'' + 
+			",name = '" + name + '\'' + 
+			",unicode = '" + unicode + '\'' + 
+			",category = '" + category + '\'' + 
+			",group = '" + group + '\'' + 
+			"}";
+		}
 }

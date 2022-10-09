@@ -1,16 +1,18 @@
 package com.example.proyectoiconosfx;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+
 
 
 public class Controller implements Initializable {
@@ -19,13 +21,36 @@ public class Controller implements Initializable {
 
     private String enlaceFijo = "https://emojihub.herokuapp.com/api/";
 
+    @FXML
+    private ComboBox catIdCombox;
+    @FXML
+    private ComboBox grupoIdCombox;
+
+    @FXML
+    private Label iconoLabel;
+
+
+
+    /*Carga los ComboBox*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("hola");
+        ObservableList<String> itemsCat = FXCollections.observableArrayList();
+        itemsCat.addAll("smileys_and_people", "animals_and_nature", "food_and_drink", "travel_and_places", "activities",
+        "objects","symbols","flags");
+        this.catIdCombox.setItems(itemsCat);
+
+        ObservableList<String> itemsGroup = FXCollections.observableArrayList();
+        itemsGroup.addAll("body", "cat_face", "clothing", "creature_face", "emotion","face_negative");
+        this.grupoIdCombox.setItems(itemsGroup);
 
     }
 
     /*recoge un icono aleatorio y lo envia a la interfaz grafica*/
-    public void aleatorio() {
+
+
+    @FXML
+    public void aleatorio(ActionEvent actionEvent) {
 
         System.out.println(enlaceFijo);
         try {
@@ -33,46 +58,62 @@ public class Controller implements Initializable {
             ObjectMapper mapa=new ObjectMapper();
             Response respuesta=mapa.readValue(enlace,Response.class);
             String icono=respuesta.getUnicode().get(0);
-            System.out.println(icono);
+            iconoLabel.setText(icono);
 
         }catch (IOException e){
             System.out.println(e);
+
         }
 
     }
 
-    /**/
-    public void buscarGrupo(){
+    /*Envia un grupo de iconos segun el grupo seleccionado*/
+
+    public void buscarGrupo(ActionEvent actionEvent){
 
         try {
-            URL enlace = new URL(enlaceFijo + "all/group_animal_bird");
+
+            URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
             ObjectMapper mapa = new ObjectMapper();
-            Response respuesta=mapa.readValue(enlace,Response.class);
-            
+            ResponseAllItem[] respuesta=mapa.readValue(enlace, ResponseAllItem[].class);
 
-
+            for(ResponseAllItem a:respuesta){
+                System.out.println(a.getUnicode());
+            }
 
 
         }catch (IOException e){
             System.out.println(e);
         }
     }
-/*
+    /*Envia un grupo de iconos segun la categoria seleccionada*/
     public void buscarCategoria(ActionEvent actionEvent){
 
         try {
-            URL enlace = new URL(enlaceFijo + "/group_face_positive");
+            URL enlace = new URL(enlaceFijo + "all/category_"+setCatIdCombox());
             ObjectMapper mapa = new ObjectMapper();
-            Response respuesta = mapa.readValue(enlace, Response.class);
-            respuesta.getUnicode().stream().forEach(System.out::println);
+            ResponseAllItem[] respuesta=mapa.readValue(enlace, ResponseAllItem[].class);
 
+            for(ResponseAllItem a:respuesta){
+                System.out.println(a.getUnicode());
+            }
         }catch (IOException e){
             System.out.println(e);
         }
 
-
     }
- */
+    /*Pasa String de la categoria seleccionada*/
+    public String  setCatIdCombox(){
+        String selCat=catIdCombox.getSelectionModel().getSelectedItem().toString();
+        System.out.println(selCat);
+        return selCat;
+    }
+    /*Pasa Stgring del Grupo seleccionado*/
+    public String  setgroupIdCombox(){
+        String selgroup=grupoIdCombox.getSelectionModel().getSelectedItem().toString();
+        System.out.println(selgroup);
+        return selgroup;
+    }
 
 
 }
