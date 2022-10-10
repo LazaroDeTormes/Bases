@@ -3,7 +3,7 @@ package com.example.proyectoiconosfx.models;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Response{
+public class Icon {
 
 	@JsonProperty("htmlCode")
 	public List<String> htmlCode;

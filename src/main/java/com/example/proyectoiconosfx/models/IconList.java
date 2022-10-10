@@ -3,12 +3,12 @@ package com.example.proyectoiconosfx.models;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ResponseAll{
+public class IconList {
 
 	@JsonProperty("ResponseAll")
-	public List<ResponseAllItem> responseAll;
+	public List<Icon> responseAll;
 
-	public List<ResponseAllItem> getResponseAll(){
+	public List<Icon> getResponseAll(){
 
 		return responseAll;
 	}

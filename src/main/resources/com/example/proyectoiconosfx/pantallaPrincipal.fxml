@@ -1,24 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectoiconosfx.Controller">
+<HBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectoiconosfx.controllers.Controller">
    <children>
-      <AnchorPane prefHeight="339.0" prefWidth="505.0">
+      <VBox>
          <children>
-            <Button accessibleText="categoriaBoton" layoutX="19.0" layoutY="79.0" mnemonicParsing="false" onAction="#buscarCategoria" text="Buscar categoria" />
-            <Button accessibleText="grupoBoton" layoutX="19.0" layoutY="167.0" mnemonicParsing="false" onAction="#buscarGrupo" text="Buscar grupo" />
-            <Button fx:id="aleatorioId" accessibleText="aleatBoton" layoutX="19.0" layoutY="267.0" mnemonicParsing="false" onAction="#aleatorio" prefHeight="25.0" prefWidth="149.0" text="Aleatorio" />
-            <TableView layoutX="189.0" layoutY="22.0" prefHeight="350.0" prefWidth="461.0">
+            <ComboBox fx:id="catIdCombox" prefWidth="200.0" promptText="Seleccionar">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin></ComboBox>
+            <Button accessibleText="categoriaBoton" mnemonicParsing="false" onAction="#buscarCategoria" prefWidth="200.0" text="Buscar categoria">
+               <VBox.margin>
+                  <Insets bottom="60.0" />
+               </VBox.margin></Button>
+            <ComboBox fx:id="grupoIdCombox" prefWidth="200.0" promptText="Seleccionar">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></ComboBox>
+            <Button accessibleText="grupoBoton" mnemonicParsing="false" onAction="#buscarGrupo" prefWidth="200.0" text="Buscar grupo">
+               <VBox.margin>
+                  <Insets bottom="60.0" />
+               </VBox.margin></Button>
+            <Button fx:id="aleatorioId" accessibleText="aleatBoton" mnemonicParsing="false" onAction="#aleatorio" prefWidth="200.0" text="Aleatorio">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></Button>
+            <Label fx:id="iconoLabel" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" text="Label">
+               <VBox.margin>
+                  <Insets left="40.0" right="20.0" />
+               </VBox.margin></Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+      <VBox HBox.hgrow="ALWAYS">
+         <children>
+            <TableView minHeight="200.0" minWidth="500.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="150.0" text="Nombre" />
+                  <TableColumn prefWidth="150.0" text="Categoria" />
+                  <TableColumn prefWidth="150.0" text="Grupo" />
+                  <TableColumn prefWidth="75.0" text="Icono" />
               </columns>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </TableView>
-            <Label fx:id="iconoLabel" layoutX="45.0" layoutY="304.0" prefHeight="75.0" prefWidth="97.0" text="Label" />
-            <ComboBox fx:id="catIdCombox" layoutX="19.0" layoutY="42.0"  prefWidth="150.0" promptText="Seleccionar" />
-            <ComboBox fx:id="grupoIdCombox" layoutX="19.0" layoutY="128.0" prefWidth="150.0" promptText="Seleccionar" />
-         </children></AnchorPane>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Guardar datos en:" textAlignment="CENTER" />
+            <HBox alignment="CENTER">
+               <children>
+                  <CheckBox mnemonicParsing="false" text="JSON">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></CheckBox>
+                  <CheckBox mnemonicParsing="false" text="XML">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Binario">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></CheckBox>
+                  <CheckBox mnemonicParsing="false" text="Texto" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
    </children>
-</VBox>
+</HBox>

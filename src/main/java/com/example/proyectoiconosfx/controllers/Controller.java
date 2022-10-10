@@ -1,6 +1,6 @@
-package com.example.proyectoiconosfx;
+package com.example.proyectoiconosfx.controllers;
 
-
+import com.example.proyectoiconosfx.models.Icon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,9 +56,12 @@ public class Controller implements Initializable {
         try {
             URL enlace=new URL(enlaceFijo+"random");
             ObjectMapper mapa=new ObjectMapper();
-            Response respuesta=mapa.readValue(enlace,Response.class);
+            Icon respuesta=mapa.readValue(enlace, Icon.class);
             String icono=respuesta.getUnicode().get(0);
-            iconoLabel.setText(icono);
+
+            Character ch = Character.lowSurrogate(0x1F414);
+
+            iconoLabel.setText(String.valueOf(ch));
 
         }catch (IOException e){
             System.out.println(e);
@@ -75,10 +78,10 @@ public class Controller implements Initializable {
 
             URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
             ObjectMapper mapa = new ObjectMapper();
-            ResponseAllItem[] respuesta=mapa.readValue(enlace, ResponseAllItem[].class);
+            Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
 
-            for(ResponseAllItem a:respuesta){
-                System.out.println(a.getUnicode());
+            for(Icon a : respuesta){
+                System.out.println("\\" + a.getUnicode().get(0));
             }
 
 
@@ -92,9 +95,9 @@ public class Controller implements Initializable {
         try {
             URL enlace = new URL(enlaceFijo + "all/category_"+setCatIdCombox());
             ObjectMapper mapa = new ObjectMapper();
-            ResponseAllItem[] respuesta=mapa.readValue(enlace, ResponseAllItem[].class);
+            Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
 
-            for(ResponseAllItem a:respuesta){
+            for(Icon a : respuesta){
                 System.out.println(a.getUnicode());
             }
         }catch (IOException e){
