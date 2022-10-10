@@ -34,7 +34,7 @@ public class Controller implements Initializable {
     /*Carga los ComboBox*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("hola");
+
         ObservableList<String> itemsCat = FXCollections.observableArrayList();
         itemsCat.addAll("smileys_and_people", "animals_and_nature", "food_and_drink", "travel_and_places", "activities",
         "objects","symbols","flags");

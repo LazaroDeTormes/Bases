@@ -3,9 +3,10 @@
     requires javafx.fxml;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
+        requires java.xml;
 
 
-    opens com.example.proyectoiconosfx to javafx.fxml;
+        opens com.example.proyectoiconosfx to javafx.fxml;
     exports com.example.proyectoiconosfx;
         exports com.example.proyectoiconosfx.models;
         opens com.example.proyectoiconosfx.models to javafx.fxml;
