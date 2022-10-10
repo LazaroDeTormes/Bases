@@ -1,4 +1,4 @@
-package com.example.proyectoiconosfx;
+package com.example.proyectoiconosfx.models;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
