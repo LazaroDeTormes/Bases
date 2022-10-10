@@ -42,12 +42,12 @@
       </VBox>
       <VBox HBox.hgrow="ALWAYS">
          <children>
-            <TableView minHeight="200.0" minWidth="500.0" VBox.vgrow="ALWAYS">
+            <TableView id="tablaId" minHeight="200.0" minWidth="500.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="150.0" text="Nombre" />
-                  <TableColumn prefWidth="150.0" text="Categoria" />
-                  <TableColumn prefWidth="150.0" text="Grupo" />
-                  <TableColumn prefWidth="75.0" text="Icono" />
+                <TableColumn fx:id="nombreColumId" prefWidth="150.0" text="Nombre" />
+                  <TableColumn fx:id="catColumId" prefWidth="150.0" text="Categoria" />
+                  <TableColumn fx:id="grupoColumId" prefWidth="150.0" text="Grupo" />
+                  <TableColumn fx:id="iconoColumId" prefWidth="75.0" text="Icono" />
               </columns>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -12,7 +12,7 @@ import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TableColumn;
 
 
 public class Controller implements Initializable {
@@ -28,6 +28,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Label iconoLabel;
+
+    @FXML
+    private TableColumn nombre
 
 
 
@@ -58,10 +61,8 @@ public class Controller implements Initializable {
             ObjectMapper mapa=new ObjectMapper();
             Icon respuesta=mapa.readValue(enlace, Icon.class);
             String icono=respuesta.getUnicode().get(0);
-
-            Character ch = Character.lowSurrogate(0x1F414);
-
-            iconoLabel.setText(String.valueOf(ch));
+            iconoLabel.setText(icono);
+            System.out.println(icono);
 
         }catch (IOException e){
             System.out.println(e);
@@ -69,6 +70,8 @@ public class Controller implements Initializable {
         }
 
     }
+
+
 
     /*Envia un grupo de iconos segun el grupo seleccionado*/
 
@@ -78,10 +81,12 @@ public class Controller implements Initializable {
 
             URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
             ObjectMapper mapa = new ObjectMapper();
+
             Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
 
             for(Icon a : respuesta){
                 System.out.println("\\" + a.getUnicode().get(0));
+
             }
 
 
