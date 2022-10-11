@@ -1,9 +1,10 @@
-    module com.example.proyectoiconosfx {
+module com.example.proyectoiconosfx {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
-        requires java.xml;
+    requires java.xml;
+    requires com.fasterxml.jackson.dataformat.xml;
 
 
         opens com.example.proyectoiconosfx to javafx.fxml;

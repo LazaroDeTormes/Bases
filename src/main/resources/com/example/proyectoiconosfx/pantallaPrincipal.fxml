@@ -56,19 +56,19 @@
             <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Guardar datos en:" textAlignment="CENTER" />
             <HBox alignment="CENTER">
                <children>
-                  <CheckBox mnemonicParsing="false" text="JSON">
+                  <CheckBox fx:id="chkJson" mnemonicParsing="false" text="JSON">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></CheckBox>
-                  <CheckBox mnemonicParsing="false" text="XML">
+                  <CheckBox fx:id="chkXml" mnemonicParsing="false" text="XML">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Binario">
+                  <CheckBox fx:id="chkBin" mnemonicParsing="false" text="Binario">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Texto" />
+                  <CheckBox fx:id="chkTex" mnemonicParsing="false" text="Texto" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" />

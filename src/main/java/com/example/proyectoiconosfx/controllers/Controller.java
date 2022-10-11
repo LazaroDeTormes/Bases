@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+
+import static com.example.proyectoiconosfx.controllers.Funcion_Guardado.*;
 
 
 public class Controller implements Initializable {
@@ -30,9 +33,19 @@ public class Controller implements Initializable {
     private Label iconoLabel;
 
     @FXML
-    private TableColumn nombre
+    private TableColumn nombre;
 
+    @FXML
+    private CheckBox chkJson;
 
+    @FXML
+    private CheckBox chkXml;
+
+    @FXML
+    private CheckBox chkBin;
+
+    @FXML
+    private CheckBox chkTex;
 
     /*Carga los ComboBox*/
     @Override
@@ -49,9 +62,12 @@ public class Controller implements Initializable {
 
     }
 
-    /*recoge un icono aleatorio y lo envia a la interfaz grafica*/
+    /*recoge un icono aleatorio y lo envía a la interfaz gráfica*/
 
-
+    /**
+     * Este método genera un emoticono aleatorio y lo muestra en la interfaz gráfica.
+     * @param actionEvent detecta cuando se pulsa el botón correspondiente
+     */
     @FXML
     public void aleatorio(ActionEvent actionEvent) {
 
@@ -64,6 +80,19 @@ public class Controller implements Initializable {
             iconoLabel.setText(icono);
             System.out.println(icono);
 
+            if (chkJson.isSelected()){
+                json(new Icon[]{respuesta});
+            }
+            if (chkBin.isSelected()){
+                bin(new Icon[]{respuesta});
+            }
+            if (chkXml.isSelected()){
+                xml(new Icon[]{respuesta});
+            }
+            if (chkTex.isSelected()){
+                txt(new Icon[]{respuesta});
+            }
+
         }catch (IOException e){
             System.out.println(e);
 
@@ -73,8 +102,11 @@ public class Controller implements Initializable {
 
 
 
-    /*Envia un grupo de iconos segun el grupo seleccionado*/
-
+    /*Envía un grupo de iconos según el grupo seleccionado*/
+    /**
+     * Este método genera los emoticonos de un grupo concreto y los muestra en la tabla de la interfaz gráfica.
+     * @param actionEvent detecta cuando se pulsa el botón correspondiente
+     */
     public void buscarGrupo(ActionEvent actionEvent){
 
         try {
@@ -88,13 +120,28 @@ public class Controller implements Initializable {
                 System.out.println("\\" + a.getUnicode().get(0));
 
             }
-
+            if (chkJson.isSelected()){
+                json(respuesta);
+            }
+            if (chkBin.isSelected()){
+                bin(respuesta);
+            }
+            if (chkXml.isSelected()){
+                xml(respuesta);
+            }
+            if (chkTex.isSelected()){
+                txt(respuesta);
+            }
 
         }catch (IOException e){
             System.out.println(e);
         }
     }
-    /*Envia un grupo de iconos segun la categoria seleccionada*/
+    /*Envía un grupo de iconos según la categoría seleccionada*/
+    /**
+     * Este método genera los emoticonos de una categoría en concreto y los muestra en la tabla de la interfaz gráfica.
+     * @param actionEvent detecta cuando se pulsa el botón correspondiente
+     */
     public void buscarCategoria(ActionEvent actionEvent){
 
         try {
@@ -105,18 +152,40 @@ public class Controller implements Initializable {
             for(Icon a : respuesta){
                 System.out.println(a.getUnicode());
             }
+
+            if (chkJson.isSelected()){
+                json(respuesta);
+            }
+            if (chkBin.isSelected()){
+                bin(respuesta);
+            }
+            if (chkXml.isSelected()){
+                xml(respuesta);
+            }
+            if (chkTex.isSelected()){
+                txt(respuesta);
+            }
         }catch (IOException e){
             System.out.println(e);
         }
 
     }
-    /*Pasa String de la categoria seleccionada*/
+    /*Pasa String de la categoría seleccionada*/
+
+    /**
+     * Arranca la comboBox de las categorías, pasando al método de búsqueda la categoría deseada.
+     * @return Devuelve la categoría a buscar.
+     */
     public String  setCatIdCombox(){
         String selCat=catIdCombox.getSelectionModel().getSelectedItem().toString();
         System.out.println(selCat);
         return selCat;
     }
     /*Pasa Stgring del Grupo seleccionado*/
+    /**
+     * Arranca la comboBox de los grupos, pasando al método de búsqueda el grupo deseado.
+     * @return Devuelve el grupo a buscar.
+     */
     public String  setgroupIdCombox(){
         String selgroup=grupoIdCombox.getSelectionModel().getSelectedItem().toString();
         System.out.println(selgroup);
