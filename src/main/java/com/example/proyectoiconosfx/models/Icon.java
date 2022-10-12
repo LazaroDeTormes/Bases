@@ -1,10 +1,9 @@
 package com.example.proyectoiconosfx.models;
 
-import java.io.Serializable;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Icon implements Serializable {
+public class Icon {
 
 	@JsonProperty("htmlCode")
 	public List<String> htmlCode;
@@ -21,26 +20,23 @@ public class Icon implements Serializable {
 	@JsonProperty("group")
 	public String group;
 
-	public Icon() {
-	}
-
-	public Icon(List<String> htmlCode, String name, List<String> unicode, String category, String group) {
-		this.htmlCode = htmlCode;
-		this.name = name;
-		this.unicode = unicode;
-		this.category = category;
-		this.group = group;
+	public String getIcon() {
+		return unicode.get(0);
 	}
 
 	public String getName(){
 		return name;
 	}
 
-
 	public List<String> getUnicode(){
 		return unicode;
 	}
 	public List<String>	getHtmlCode(){return htmlCode;}
+
+	public String getCategory() {
+		return category;
+	}
+
 	public String getGroup(){return group;}
 
 	@Override

@@ -10,10 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 
 import static com.example.proyectoiconosfx.controllers.Funcion_Guardado.*;
 
@@ -33,7 +30,7 @@ public class Controller implements Initializable {
     private Label iconoLabel;
 
     @FXML
-    private TableColumn nombre;
+    private TableView<Icon> tableIcons;
 
     @FXML
     private CheckBox chkJson;
@@ -47,10 +44,10 @@ public class Controller implements Initializable {
     @FXML
     private CheckBox chkTex;
 
-    /*Carga los ComboBox*/
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        /*Carga los ComboBox*/
         ObservableList<String> itemsCat = FXCollections.observableArrayList();
         itemsCat.addAll("smileys_and_people", "animals_and_nature", "food_and_drink", "travel_and_places", "activities",
         "objects","symbols","flags");
@@ -62,7 +59,7 @@ public class Controller implements Initializable {
 
     }
 
-    /*recoge un icono aleatorio y lo envía a la interfaz gráfica*/
+
 
     /**
      * Este método genera un emoticono aleatorio y lo muestra en la interfaz gráfica.
@@ -102,7 +99,7 @@ public class Controller implements Initializable {
 
 
 
-    /*Envía un grupo de iconos según el grupo seleccionado*/
+
     /**
      * Este método genera los emoticonos de un grupo concreto y los muestra en la tabla de la interfaz gráfica.
      * @param actionEvent detecta cuando se pulsa el botón correspondiente
@@ -110,34 +107,23 @@ public class Controller implements Initializable {
     public void buscarGrupo(ActionEvent actionEvent){
 
         try {
+            if(!grupoIdCombox.getSelectionModel().isEmpty()){
+                clearTable();
+                URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
+                ObjectMapper mapa = new ObjectMapper();
 
-            URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
-            ObjectMapper mapa = new ObjectMapper();
+                Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
+                List<Icon>listaIconos=Arrays.asList(respuesta);
+                tableIcons.getItems().addAll(listaIconos);
+                checkSave(respuesta);
+            }
 
-            Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
-
-            for(Icon a : respuesta){
-                System.out.println("\\" + a.getUnicode().get(0));
-
-            }
-            if (chkJson.isSelected()){
-                json(respuesta);
-            }
-            if (chkBin.isSelected()){
-                bin(respuesta);
-            }
-            if (chkXml.isSelected()){
-                xml(respuesta);
-            }
-            if (chkTex.isSelected()){
-                txt(respuesta);
-            }
 
         }catch (IOException e){
             System.out.println(e);
         }
     }
-    /*Envía un grupo de iconos según la categoría seleccionada*/
+
     /**
      * Este método genera los emoticonos de una categoría en concreto y los muestra en la tabla de la interfaz gráfica.
      * @param actionEvent detecta cuando se pulsa el botón correspondiente
@@ -145,32 +131,21 @@ public class Controller implements Initializable {
     public void buscarCategoria(ActionEvent actionEvent){
 
         try {
-            URL enlace = new URL(enlaceFijo + "all/category_"+setCatIdCombox());
-            ObjectMapper mapa = new ObjectMapper();
-            Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
-
-            for(Icon a : respuesta){
-                System.out.println(a.getUnicode());
-            }
-
-            if (chkJson.isSelected()){
-                json(respuesta);
-            }
-            if (chkBin.isSelected()){
-                bin(respuesta);
-            }
-            if (chkXml.isSelected()){
-                xml(respuesta);
-            }
-            if (chkTex.isSelected()){
-                txt(respuesta);
+            if(!catIdCombox.getSelectionModel().isEmpty()) {
+                clearTable();
+                URL enlace = new URL(enlaceFijo + "all/category_" + setCatIdCombox());
+                ObjectMapper mapa = new ObjectMapper();
+                Icon[] respuesta = mapa.readValue(enlace, Icon[].class);
+                List<Icon> listaIconos = Arrays.asList(respuesta);
+                tableIcons.getItems().addAll(listaIconos);
+                checkSave(respuesta);
             }
         }catch (IOException e){
             System.out.println(e);
         }
 
     }
-    /*Pasa String de la categoría seleccionada*/
+
 
     /**
      * Arranca la comboBox de las categorías, pasando al método de búsqueda la categoría deseada.
@@ -181,7 +156,8 @@ public class Controller implements Initializable {
         System.out.println(selCat);
         return selCat;
     }
-    /*Pasa Stgring del Grupo seleccionado*/
+
+
     /**
      * Arranca la comboBox de los grupos, pasando al método de búsqueda el grupo deseado.
      * @return Devuelve el grupo a buscar.
@@ -191,6 +167,35 @@ public class Controller implements Initializable {
         System.out.println(selgroup);
         return selgroup;
     }
+
+    /**
+     * Limpia la tabla de datos
+     *
+     */
+    public void clearTable(){
+        for ( int i = 0; i<tableIcons.getItems().size(); i++) {
+            tableIcons.getItems().clear();
+        }
+    }
+
+    /**
+     * Este método comprueba los checkBox seleccionados y ejecuta los metodos correspondientes para su guardado
+     */
+    public void checkSave(Icon[]datos){
+        if (chkJson.isSelected()){
+            json(datos);
+        }
+        if (chkBin.isSelected()){
+            bin(datos);
+        }
+        if (chkXml.isSelected()){
+            xml(datos);
+        }
+        if (chkTex.isSelected()){
+            txt(datos);
+        }
+    }
+
 
 
 }

@@ -8,10 +8,6 @@ public class IconList {
 	@JsonProperty("ResponseAll")
 	public List<Icon> responseAll;
 
-	public List<Icon> getResponseAll(){
-
-		return responseAll;
-	}
 
 	@Override
  	public String toString(){
