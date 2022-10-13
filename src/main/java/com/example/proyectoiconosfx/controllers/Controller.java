@@ -74,8 +74,11 @@ public class Controller implements Initializable {
             ObjectMapper mapa=new ObjectMapper();
             Icon respuesta=mapa.readValue(enlace, Icon.class);
             String icono=respuesta.getUnicode().get(0);
-            iconoLabel.setText(icono);
-            System.out.println(icono);
+            String substitucion=icono.replace("U+","0x");
+            int entero=Integer.decode(substitucion);
+            String iconoTraducido=new String(Character.toChars(entero));
+            iconoLabel.setText(iconoTraducido);
+
 
             if (chkJson.isSelected()){
                 json(new Icon[]{respuesta});
@@ -108,13 +111,13 @@ public class Controller implements Initializable {
 
         try {
             if(!grupoIdCombox.getSelectionModel().isEmpty()){
-                clearTable();
+                tableIcons.getItems().clear();
                 URL enlace = new URL(enlaceFijo + "all/group_"+setgroupIdCombox());
                 ObjectMapper mapa = new ObjectMapper();
-
                 Icon[] respuesta=mapa.readValue(enlace, Icon[].class);
                 List<Icon>listaIconos=Arrays.asList(respuesta);
-                tableIcons.getItems().addAll(listaIconos);
+                List<Icon>listaFinalIconos=traduccionIconos(listaIconos);
+                tableIcons.getItems().addAll(listaFinalIconos);
                 checkSave(respuesta);
             }
 
@@ -132,12 +135,18 @@ public class Controller implements Initializable {
 
         try {
             if(!catIdCombox.getSelectionModel().isEmpty()) {
-                clearTable();
+
+                tableIcons.getItems().clear();
                 URL enlace = new URL(enlaceFijo + "all/category_" + setCatIdCombox());
                 ObjectMapper mapa = new ObjectMapper();
                 Icon[] respuesta = mapa.readValue(enlace, Icon[].class);
+
                 List<Icon> listaIconos = Arrays.asList(respuesta);
-                tableIcons.getItems().addAll(listaIconos);
+
+                List<Icon>listaFinalIconos=traduccionIconos(listaIconos);
+
+
+                tableIcons.getItems().addAll(listaFinalIconos);
                 checkSave(respuesta);
             }
         }catch (IOException e){
@@ -168,15 +177,6 @@ public class Controller implements Initializable {
         return selgroup;
     }
 
-    /**
-     * Limpia la tabla de datos
-     *
-     */
-    public void clearTable(){
-        for ( int i = 0; i<tableIcons.getItems().size(); i++) {
-            tableIcons.getItems().clear();
-        }
-    }
 
     /**
      * Este método comprueba los checkBox seleccionados y ejecuta los metodos correspondientes para su guardado
@@ -194,6 +194,31 @@ public class Controller implements Initializable {
         if (chkTex.isSelected()){
             txt(datos);
         }
+    }
+
+    /**
+     *
+     *Metodo que modifica el código del emoji para hacerlo visible en java
+     */
+    public  List<Icon> traduccionIconos(List<Icon>iconos){
+        List<Icon>listaFinalIconos=new ArrayList<>();
+        Iterator<Icon>it=iconos.iterator();
+
+        while(it.hasNext()){
+            List<String>icono=new ArrayList<>();
+            Icon icon=it.next();
+            String iconoViejo=icon.getUnicode().get(0);
+            String substitucion=iconoViejo.replace("U+","0x");
+            int entero=Integer.decode(substitucion);
+            String iconoTraducido=new String(Character.toChars(entero));
+            icono.add(iconoTraducido);
+            icon.setUnicode(icono);
+            listaFinalIconos.add(icon);
+
+            System.out.println(iconoTraducido);
+
+        }
+        return listaFinalIconos;
     }
 
 
