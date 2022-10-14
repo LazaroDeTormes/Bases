@@ -93,7 +93,11 @@
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></CheckBox>
-                  <CheckBox fx:id="chkTex" mnemonicParsing="false" text="Texto" />
+                  <CheckBox fx:id="chkTex" mnemonicParsing="false" text="Texto">
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding></CheckBox>
+                  <Button fx:id="guardarId" mnemonicParsing="false" onAction="#setGuardarId" text="Guardar" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" />

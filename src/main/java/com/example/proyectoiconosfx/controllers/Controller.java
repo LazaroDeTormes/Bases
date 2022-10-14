@@ -1,6 +1,7 @@
 package com.example.proyectoiconosfx.controllers;
 
 import com.example.proyectoiconosfx.models.Icon;
+import com.fasterxml.jackson.core.JsonToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,9 +23,9 @@ public class Controller implements Initializable {
     private String enlaceFijo = "https://emojihub.herokuapp.com/api/";
 
     @FXML
-    private ComboBox catIdCombox;
+    private ComboBox<String> catIdCombox;
     @FXML
-    private ComboBox grupoIdCombox;
+    private ComboBox<String> grupoIdCombox;
 
     @FXML
     private Label iconoLabel;
@@ -43,6 +44,9 @@ public class Controller implements Initializable {
 
     @FXML
     private CheckBox chkTex;
+
+    @FXML
+    private Button guardarId;
 
 
     @Override
@@ -80,19 +84,6 @@ public class Controller implements Initializable {
             iconoLabel.setText(iconoTraducido);
 
 
-            if (chkJson.isSelected()){
-                json(new Icon[]{respuesta});
-            }
-            if (chkBin.isSelected()){
-                bin(new Icon[]{respuesta});
-            }
-            if (chkXml.isSelected()){
-                xml(new Icon[]{respuesta});
-            }
-            if (chkTex.isSelected()){
-                txt(new Icon[]{respuesta});
-            }
-
         }catch (IOException e){
             System.out.println(e);
 
@@ -118,7 +109,8 @@ public class Controller implements Initializable {
                 List<Icon>listaIconos=Arrays.asList(respuesta);
                 List<Icon>listaFinalIconos=traduccionIconos(listaIconos);
                 tableIcons.getItems().addAll(listaFinalIconos);
-                checkSave(respuesta);
+
+
             }
 
 
@@ -142,12 +134,9 @@ public class Controller implements Initializable {
                 Icon[] respuesta = mapa.readValue(enlace, Icon[].class);
 
                 List<Icon> listaIconos = Arrays.asList(respuesta);
-
                 List<Icon>listaFinalIconos=traduccionIconos(listaIconos);
-
-
                 tableIcons.getItems().addAll(listaFinalIconos);
-                checkSave(respuesta);
+
             }
         }catch (IOException e){
             System.out.println(e);
@@ -219,6 +208,22 @@ public class Controller implements Initializable {
 
         }
         return listaFinalIconos;
+    }
+
+    /**
+     * Este método recibe los datos de la tabla y los manda como parámetro al método «checkSave», el cual discierne
+     * entre los diferentes métodos de guardado.
+     * @param event Al pulsar el botón guarda los datos de la tabla según el checkbox seleccionado
+     */
+    @FXML
+    public void setGuardarId(ActionEvent event){
+        Icon[] icons = tableIcons.getItems().toArray(Icon[]::new);
+
+        Arrays.stream(icons).forEach(System.out::println);
+        if(icons.length>0){
+            checkSave(icons);
+        }
+
     }
 
 
