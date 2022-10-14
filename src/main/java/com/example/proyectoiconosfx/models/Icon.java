@@ -31,6 +31,7 @@ public class Icon {
 	public List<String> getUnicode(){
 		return unicode;
 	}
+
 	public List<String>	getHtmlCode(){return htmlCode;}
 
 	public String getCategory() {
@@ -38,6 +39,10 @@ public class Icon {
 	}
 
 	public String getGroup(){return group;}
+
+	public void setUnicode(List<String> unicode) {
+		this.unicode = unicode;
+	}
 
 	@Override
 	public String toString() {
