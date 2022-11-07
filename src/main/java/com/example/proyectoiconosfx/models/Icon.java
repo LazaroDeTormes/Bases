@@ -20,6 +20,8 @@ public class Icon {
 	@JsonProperty("group")
 	public String group;
 
+
+
 	public String getIcon() {
 		return unicode.get(0);
 	}
@@ -29,12 +31,15 @@ public class Icon {
 	}
 
 	public List<String> getUnicode(){
+
 		return unicode;
 	}
 
-	public List<String>	getHtmlCode(){return htmlCode;}
+	public List<String>	getHtmlCode(){
+		return htmlCode;}
 
 	public String getCategory() {
+
 		return category;
 	}
 

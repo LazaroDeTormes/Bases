@@ -5,9 +5,10 @@ module com.example.proyectoiconosfx {
     requires com.fasterxml.jackson.databind;
     requires java.xml;
     requires com.fasterxml.jackson.dataformat.xml;
+    requires java.sql;
 
 
-        opens com.example.proyectoiconosfx to javafx.fxml;
+    opens com.example.proyectoiconosfx to javafx.fxml;
     exports com.example.proyectoiconosfx;
         exports com.example.proyectoiconosfx.models;
         opens com.example.proyectoiconosfx.models to javafx.fxml;
