@@ -18,7 +18,7 @@ public class LogginController {
     private TextField usuarioTexto;
 
     @FXML
-    private TextField contraTexto;
+    private TextField contraTexto;origin
 
 
 
@@ -31,7 +31,7 @@ public class LogginController {
         DaoPerfiles con=new DaoPerfiles();
 
         if(con.comprobarUsuario(usuario,pass)){
-         
+
 
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pantallaPrincipal.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
